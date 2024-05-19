@@ -36,10 +36,16 @@
     return Math.floor(millis / 1000 / (3600 * 24));
   }
 
+  // This calculation method is counted as a new day after 00:00
+  function removeTimeFromTimestamp(timestamp: number) {
+    const date = new Date(timestamp);
+    date.setHours(0, 0, 0, 0);
+    return date.getTime();
+  }
+
   $: lastDates = $storeDates.length > 0 ? $storeDates.at(-1)! : Date.now();
 
-  // This calculation method is counted as a new day after 00:00
-  $: days = toDays(Date.now()) - toDays(lastDates);
+  $: days = toDays(Date.now() - removeTimeFromTimestamp(lastDates));
 
   $: dates = $storeDates
     .map((v) => {
