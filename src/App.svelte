@@ -24,7 +24,7 @@
   function handleFuck() {
     const now = Date.now();
     $storeDates = [...$storeDates, now];
-    toast("The days has been reseted 😔");
+    toast("You fucked again 😔");
   }
 
   function handleDeleteDate(index: number) {
